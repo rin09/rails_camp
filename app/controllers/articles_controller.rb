@@ -11,14 +11,11 @@ class ArticlesController < ApplicationController
     @articles.each do |a|
       @daily_pageviews[a.id] = REDIS.get "articles/daily/#{today}/#{a.id}"
     end
-    # PV数1位から4位までの記事を取得
-
-    ids = REDIS.zrevrangebyscore "articles/daily/#{Date.today.to_s}", "+inf", 0, limit: [0, 4]
-    @rank = Article.where(id: ids).sort_by{ |article| ids.index(article.id.to_s) }
     
   end
 
   def show
+    @articles = Article.all
   	@article = Article.find(params[:id])
   	@user = User.find_by(id: @article.user_id)
 
@@ -29,10 +26,6 @@ class ArticlesController < ApplicationController
     @articles.each do |a|
       @daily_pageviews[a.id] = REDIS.get "articles/daily/#{today}/#{a.id}"
     end
-    # PV数1位から4位までの記事を取得
-
-    ids = REDIS.zrevrangebyscore "articles/daily/#{Date.today.to_s}", "+inf", 0, limit: [0, 4]
-    @rank = Article.where(id: ids).sort_by{ |article| ids.index(article.id.to_s) }
 
     #redis
     REDIS.zincrby "articles/daily/#{Date.today.to_s}", 1, @article.id
@@ -59,6 +52,7 @@ class ArticlesController < ApplicationController
   		render 'new'
   	end
   end
+
 
   private
 

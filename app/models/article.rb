@@ -7,5 +7,10 @@ class Article < ApplicationRecord
   validates :title, presence: true
   validates :content, presence: true, length: {maximum: 500 }
 
+  def self.most_popular
+  	ids = REDIS.zrevrangebyscore "articles/daily/#{Date.today.to_s}", "+inf", 0, limit: [0, 4]
+    where(id: ids).sort_by{ |article| ids.index(article.id.to_s) }
+  end
+
 
 end
