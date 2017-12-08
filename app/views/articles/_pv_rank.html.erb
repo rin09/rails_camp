@@ -1,0 +1,6 @@
+<h2>★PV数ランキング</h2>
+  <ul>
+    <%= @rank.each do |r| %>
+      <li><a href=""><%= r.title %><span> （<%= @daily_pageviews[r.id] %>）</span></a></li>
+     <% end %>
+    </ul>

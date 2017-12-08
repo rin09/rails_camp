@@ -1,0 +1,16 @@
+<div id="title">
+    <%= render 'articles/articles_show' %>
+</div>
+
+<div id="article_wrap">
+  <div id="content">
+    <%= @article.content %>
+  </div>
+
+
+    <div id="sidebar">
+        <%= render 'articles/pv_rank' %>
+    </div>
+    <div class="clear"></div>
+
+</div>

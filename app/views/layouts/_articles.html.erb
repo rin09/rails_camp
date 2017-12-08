@@ -1,0 +1,18 @@
+<div id="article_wrap">
+
+    <div id="article_list">
+        <% @articles.each do |article| %>
+        <div>
+            <h2><%= link_to article.title, controller: "articles", action: "show", id: article.id %></h2>
+            <p><%= article.created_at %></p>
+            <br>
+        </div>
+        <% end %>
+        
+    </div>
+
+    <div id="sidebar">
+        <%= render 'articles/pv_rank' %>
+    </div>
+    <div class="clear"></div>
+</div>

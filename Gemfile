@@ -11,7 +11,6 @@ gem 'turbolinks', '~> 5'
 gem 'will_paginate',           '3.1.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'redis'
-gem 'redis-rails'
 gem "faker"
 
 # UI/UX
@@ -44,7 +43,7 @@ gem 'fog',                     '1.40.0'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
-  gem 'byebug', platform: :mri
+  gem 'byebug'
 end
 
 group :development do
@@ -64,7 +63,4 @@ end
 group :production do
   gem 'pg', '0.20.0'
 end
-
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
