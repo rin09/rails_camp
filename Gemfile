@@ -59,12 +59,10 @@ group :test do
   gem 'minitest-reporters',       '1.1.14'
   gem 'guard',                    '2.13.0'
   gem 'guard-minitest',           '2.4.4'
-  #RSpec
-  gem "faker"
-  gem "database_cleaner"
-  gem "launchy"
-  gem "selenium-webdriver"
-  gem "shoulda-matchers"
+end
+
+group :production do
+  gem 'pg', '0.20.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
