@@ -31,9 +31,6 @@ class ArticlesController < ApplicationController
     REDIS.zincrby "articles/daily/#{Date.today.to_s}", 1, @article.id
     REDIS.incr "articles/daily/#{Date.today.to_s}/#{@article.id}"
 
-
-    # その日のpv数
-    @pv = REDIS.get "articles/daily/#{Date.today.to_s}/#{@article.id}"
     
     # PV数1位から4位までの記事を取得
 
@@ -53,10 +50,35 @@ class ArticlesController < ApplicationController
   	end
   end
 
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  def update
+    @article = Article.find(params[:id])
+
+    if @article.update_attributes(article_params)
+      flash[:success] = "ポストが更新されました"
+      redirect_to @article
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+    if @article.present?
+    @article.destroy
+    flash[:success] = "Article deleted"
+    redirect_to '/'
+  end
+  end
+
 
   private
 
   	def article_params
   		params.require(:article).permit(:content, :title).merge(user_id: current_user.id)
     end
+
 end

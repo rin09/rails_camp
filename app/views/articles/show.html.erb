@@ -5,6 +5,10 @@
 <div id="article_wrap">
   <div id="content">
     <%= @article.content %>
+    <% if current_user %>
+    <br>
+    <%= link_to "delete", @article, method: :delete %>
+    <% end %>
   </div>
 
 

@@ -2,5 +2,6 @@
   <ul>
     <%= Article.most_popular.each do |r| %>
       <li><%= link_to( r.title, controller: "articles", action: "show", id: r.id) %><span> （<%= @daily_pageviews[r.id] %>）</span></a></li>
+      <%= debug r %>
      <% end %>
     </ul>
