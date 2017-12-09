@@ -1,7 +1,7 @@
 <h2>★PV数ランキング</h2>
   <ul>
-    <%= Article.most_popular.each do |r| %>
-      <li><%= link_to( r.title, controller: "articles", action: "show", id: r.id) %><span> （<%= @daily_pageviews[r.id] %>）</span></a></li>
-      <%= debug r %>
+    <% Article.most_popular.each do |r| %>
+      <li><%= link_to( r.title, controller: "articles", action: "show", id: r.id) %>
+      	<span> （<%= @daily_pageviews[r.id] %>）</span></a></li>
      <% end %>
     </ul>

@@ -10,8 +10,7 @@ class ArticlesController < ApplicationController
     # その日のpv数
     @articles.each do |a|
       @daily_pageviews[a.id] = REDIS.get "articles/daily/#{today}/#{a.id}"
-    end
-    
+      end
   end
 
   def show
@@ -30,9 +29,6 @@ class ArticlesController < ApplicationController
     #redis
     REDIS.zincrby "articles/daily/#{Date.today.to_s}", 1, @article.id
     REDIS.incr "articles/daily/#{Date.today.to_s}/#{@article.id}"
-
-    
-    # PV数1位から4位までの記事を取得
 
   end
 
@@ -73,7 +69,6 @@ class ArticlesController < ApplicationController
     redirect_to '/'
   end
   end
-
 
   private
 
